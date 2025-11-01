@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF8F8F8),
       body: Stack(
           children: [
             // // Orange character positioned at top right
@@ -298,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     '평균 떼 지속시간',
                     style: TextStyle(
                       color: const Color(0xFF007BEB),
-                      fontSize: screenWidth * 0.027,
+                      fontSize: screenWidth * 0.03,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w600,
                       height: 1.40,
@@ -307,17 +307,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   SizedBox(height: screenHeight * 0.02),
 
-                  // Bottom card stack (layered effect)
-                  Stack(
-                    children: [
+                  // Bottom card stack (layered effect) - responsive version of reference
+                  SizedBox(
+                    height: screenHeight * 0.22, // Give Stack explicit height
+                    child: Stack(
+                      children: [
                       // Back layer
                       Positioned(
-                        top: screenHeight * 0.021,
+                        top: screenHeight * 0.042, // Lowered back layer slightly
                         child: Container(
-                          width: screenWidth * 0.89,
-                          height: screenHeight * 0.156,
+                          width: screenWidth * 0.89, // 267/371 (adjusted to match dashboard width)
+                          height: screenHeight * 0.156, // 117/748
                           decoration: ShapeDecoration(
-                            color: const Color(0x26007BEB),
+                            color: const Color(0x1A007BEB), // 10% opacity
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.37),
                             ),
@@ -326,22 +328,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // Middle layer
                       Positioned(
-                        top: screenHeight * 0.01,
+                        top: screenHeight * 0.020, // Adjusted for better layered effect
                         child: Container(
-                          width: screenWidth * 0.89,
-                          height: screenHeight * 0.166,
+                          width: screenWidth * 0.89, // 267/371 (adjusted to match dashboard width)
+                          height: screenHeight * 0.166, // 124/748
                           decoration: ShapeDecoration(
-                            color: const Color(0x19007BEB),
+                            color: const Color(0x26007BEB), // 15% opacity
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.37),
                             ),
                           ),
                         ),
                       ),
-                      // Front layer
+                      // Front layer - main white container
                       Container(
-                        width: screenWidth * 0.89,
-                        height: screenHeight * 0.172,
+                        width: screenWidth * 0.89, // 267/371 (adjusted to match dashboard width)
+                        height: screenHeight * 0.172, // 129/748
                         decoration: ShapeDecoration(
                           color: Colors.white,
                           shape: RoundedRectangleBorder(
@@ -356,80 +358,88 @@ class _HomeScreenState extends State<HomeScreen> {
                             )
                           ],
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.all(screenWidth * 0.045),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Progress bar
-                              Container(
-                                width: double.infinity,
-                                height: screenHeight * 0.007,
-                                decoration: ShapeDecoration(
-                                  color: const Color(0xFFE4E1E1),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.37),
-                                  ),
-                                ),
-                              ),
+                      ),
 
-                              SizedBox(height: screenHeight * 0.015),
-
-                              // Category labels
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    '떼쓰기',
-                                    style: TextStyle(
-                                      color: const Color(0xFF007BEB),
-                                      fontSize: screenWidth * 0.0216,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w500,
-                                      height: 1.40,
-                                    ),
-                                  ),
-                                  Text(
-                                    '진정',
-                                    style: TextStyle(
-                                      color: const Color(0xFF007BEB),
-                                      fontSize: screenWidth * 0.0216,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w500,
-                                      height: 1.40,
-                                    ),
-                                  ),
-                                  Text(
-                                    '교육',
-                                    style: TextStyle(
-                                      color: const Color(0xFF007BEB),
-                                      fontSize: screenWidth * 0.0216,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w500,
-                                      height: 1.40,
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(height: screenHeight * 0.035),
-
-                              // Bottom message
-                              Text(
-                                '측정 데이터가 없습니다!',
-                                style: TextStyle(
-                                  color: const Color(0xFF007BEB),
-                                  fontSize: screenWidth * 0.0324,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.40,
-                                ),
-                              ),
-                            ],
+                      // Progress bar
+                      Positioned(
+                        left: screenWidth * 0.0675, // 17/371 (relative to card) - 69-52=17
+                        top: screenHeight * 0.045, // 34/748 (relative to card) - 473-439=34
+                        child: Container(
+                          width: screenWidth * 0.628, // 233/371
+                          height: screenHeight * 0.0067, // 5/748
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFFE4E1E1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.37),
+                            ),
                           ),
                         ),
                       ),
-                    ],
+
+                      // Category labels with exact positioning
+                      Positioned(
+                        left: screenWidth * 0.0675, // 17/371 (relative to card) - 69-52=17
+                        top: screenHeight * 0.063, // 47/748 (relative to card) - 486-439=47
+                        child: Text(
+                          '떼쓰기',
+                          style: TextStyle(
+                            color: const Color(0xFF007BEB),
+                            fontSize: screenWidth * 0.0216, // 8/371
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            height: 1.40,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: screenWidth * 0.342, // 127/371 (relative to card) - 179-52=127
+                        top: screenHeight * 0.063, // 47/748 (relative to card) - 486-439=47
+                        child: Text(
+                          '진정',
+                          style: TextStyle(
+                            color: const Color(0xFF007BEB),
+                            fontSize: screenWidth * 0.0216, // 8/371
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            height: 1.40,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: screenWidth * 0.636, // 236/371 (relative to card) - 288-52=236
+                        top: screenHeight * 0.063, // 47/748 (relative to card) - 486-439=47
+                        child: Text(
+                          '교육',
+                          style: TextStyle(
+                            color: const Color(0xFF007BEB),
+                            fontSize: screenWidth * 0.0216, // 8/371
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w500,
+                            height: 1.40,
+                          ),
+                        ),
+                      ),
+
+                      // Bottom message
+                      Positioned(
+                        left: screenWidth * 0.0675, // 17/371 (relative to card) - 69-52=17
+                        top: screenHeight * 0.126, // 94/748 (relative to card) - 533-439=94
+                        child: SizedBox(
+                          width: screenWidth * 0.644, // 239/371
+                          child: Text(
+                            '측정 데이터가 없습니다!',
+                            style: TextStyle(
+                              color: const Color(0xFF007BEB),
+                              fontSize: screenWidth * 0.0324, // 12/371
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w600,
+                              height: 1.40,
+                            ),
+                          ),
+                        ),
+                      ),
+                      ],
+                    ),
                   ),
                 ],
               ),
