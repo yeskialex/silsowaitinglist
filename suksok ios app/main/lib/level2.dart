@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   // Main title
                   Text(
-                    '쑥쏙이는\n오늘도 열심히 성장중이에요!',
+                    '민준이는\n오늘도 열심히 성장중이에요!',
                     style: TextStyle(
                       color: const Color(0xFF007BEB),
                       fontSize: screenWidth * 0.0485,
@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               SizedBox(height: screenHeight * 0.003),
 
                               Text(
-                                '쑥쏙 단계 1입니다',
+                                '쑥쏙 단계 2입니다',
                                 style: TextStyle(
                                   color: const Color(0xFFFFD724),
                                   fontSize: screenWidth * 0.0593,
@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               SizedBox(height: screenHeight * 0.010),
 
                               Text(
-                                '민준이는 체질량지수가 높은 편이에요!\n민준이의 건강한 성장을 위해 함께 노력해요.',
+                                '쑥쏙 단계가 1단계 상승했습니다. 잘 하고 있어요!\n지금처럼 건강 습관을 유지하는 것이 더 중요합니다.',
                                 style: TextStyle(
                                   color: const Color(0xFFF8F8F8),
                                   fontSize: screenWidth * 0.027,
@@ -428,7 +428,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SizedBox(
                           width: screenWidth * 0.644, // 239/371
                           child: Text(
-                            '측정 데이터가 없습니다!',
+                            '떼쓰기 시간 5% 감소!\n아이의 이해도가 올라가고 있어요.',
                             style: TextStyle(
                               color: const Color(0xFF007BEB),
                               fontSize: screenWidth * 0.035, // 12/371
