@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 '쑥쏙 단계가 1단계 상승했습니다. 잘 하고 있어요!\n지금처럼 건강 습관을 유지하는 것이 더 중요합니다.',
                                 style: TextStyle(
                                   color: const Color(0xFFF8F8F8),
-                                  fontSize: screenWidth * 0.027,
+                                  fontSize: screenWidth * 0.03,
                                   fontFamily: 'Pretendard',
                                   fontWeight: FontWeight.w500,
                                   height: 1.40,
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   Container(
-                                    width: screenWidth * 0.08,
+                                    width: screenWidth * 0.16,
                                     height: screenHeight * 0.007,
                                     decoration: ShapeDecoration(
                                       color: const Color(0xFFFFD724),
@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   Positioned(
-                                    left: screenWidth * 0.045,
+                                    left: screenWidth * 0.125,
                                     top: -screenHeight * 0.006,
                                     child: Container(
                                       width: screenWidth * 0.04,
@@ -181,28 +181,40 @@ class _HomeScreenState extends State<HomeScreen> {
                               SizedBox(height: screenHeight * 0.003),
 
                               // Progress numbers
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '1',
-                                    style: TextStyle(
-                                      color: const Color(0xFFFFD724),
-                                      fontSize: screenWidth * 0.0324,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w600,
+                              SizedBox(
+                                height: screenHeight * 0.025,
+                                child: Stack(
+                                  children: [
+                                    // "2" positioned directly below the yellow circle
+                                    Positioned(
+                                      left: screenWidth * 0.135,
+                                      top: screenHeight * 0.003,
+                                      child: Text(
+                                        '2',
+                                        style: TextStyle(
+                                          color: const Color(0xFFFFD724),
+                                          fontSize: screenWidth * 0.0324,
+                                          fontFamily: 'Pretendard',
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    '10',
-                                    style: TextStyle(
-                                      color: const Color(0xFFFFD724),
-                                      fontSize: screenWidth * 0.0324,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w600,
+                                    // "10" at the end
+                                    Positioned(
+                                      right: 0,
+                                      top: screenHeight * 0.003,
+                                      child: Text(
+                                        '10',
+                                        style: TextStyle(
+                                          color: const Color(0xFFFFD724),
+                                          fontSize: screenWidth * 0.0324,
+                                          fontFamily: 'Pretendard',
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -361,19 +373,154 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      // Progress bar
+                      // Time values above progress bar
+                      Positioned(
+                        left: screenWidth * 0.0675, // Left edge aligned with progress bar
+                        top: screenHeight * 0.023, // Above the progress bar
+                        child: Text(
+                          '2:39',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontSize: screenWidth * 0.027,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFF007BEB),
+                          ),
+                        ),
+                      ),
+
+                      // Time value above first circle (calm section)
+                      Positioned(
+                        left: ((screenWidth * 0.755) * 0.35), // No offset - aligned with circle position
+                        top: screenHeight * 0.023,
+                        child: Text(
+                          '0:54',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontSize: screenWidth * 0.027,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFF007BEB),
+                          ),
+                        ),
+                      ),
+
+                      // Time value above second circle (education section)
+                      Positioned(
+                        left: ((screenWidth * 0.755) * 0.55), // No offset - aligned with circle position
+                        top: screenHeight * 0.023,
+                        child: Text(
+                          '3:02',
+                          style: TextStyle(
+                            fontFamily: 'Pretendard',
+                            fontSize: screenWidth * 0.027,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFF007BEB),
+                          ),
+                        ),
+                      ),
+
+                      // Progress bar with segments and circles
                       Positioned(
                         left: screenWidth * 0.0675, // 17/371 (relative to card) - 69-52=17
                         top: screenHeight * 0.045, // 34/748 (relative to card) - 473-439=34
-                        child: Container(
-                          width: screenWidth * 0.755, // Adjusted to fit properly within white card
-                          height: screenHeight * 0.0067, // 5/748
-                          decoration: ShapeDecoration(
-                            color: const Color(0xFFE4E1E1),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.37),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            // Background bar
+                            Container(
+                              width: screenWidth * 0.755, // Adjusted to fit properly within white card
+                              height: screenHeight * 0.0067, // 5/748
+                              decoration: ShapeDecoration(
+                                color: const Color(0xFFE4E1E1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.37),
+                                ),
+                              ),
                             ),
-                          ),
+
+                            // Tantrum section (light blue)
+                            Container(
+                              width: (screenWidth * 0.755) * 0.25, // 25% of progress bar
+                              height: screenHeight * 0.0067,
+                              decoration: ShapeDecoration(
+                                color: const Color(0xFFC9E5FF),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.37),
+                                ),
+                              ),
+                            ),
+
+                            // Calm section (medium blue)
+                            Positioned(
+                              left: (screenWidth * 0.755) * 0.25,
+                              child: Container(
+                                width: (screenWidth * 0.755) * 0.2, // 20% of progress bar (reduced from 35%)
+                                height: screenHeight * 0.0067,
+                                decoration: ShapeDecoration(
+                                  color: const Color(0xFF73BCFF),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.37),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            // Education section (dark blue)
+                            Positioned(
+                              left: (screenWidth * 0.755) * 0.45,
+                              child: Container(
+                                width: (screenWidth * 0.755) * 0.55, // 55% of progress bar (increased from 40%)
+                                height: screenHeight * 0.0067,
+                                decoration: ShapeDecoration(
+                                  color: const Color(0xFF007BEB),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.37),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            // Circle at the end of tantrum section
+                            Positioned(
+                              left: ((screenWidth * 0.755) * 0.25) - screenWidth * 0.015,
+                              top: -screenHeight * 0.0033,
+                              child: Container(
+                                width: screenWidth * 0.03,
+                                height: screenWidth * 0.03,
+                                decoration: const ShapeDecoration(
+                                  color: Color(0xFFC9E5FF),
+                                  shape: OvalBorder(),
+                                ),
+                              ),
+                            ),
+
+                            // Circle at the end of calm section
+                            Positioned(
+                              left: ((screenWidth * 0.755) * 0.45) - screenWidth * 0.015,
+                              top: -screenHeight * 0.0033,
+                              child: Container(
+                                width: screenWidth * 0.03,
+                                height: screenWidth * 0.03,
+                                decoration: const ShapeDecoration(
+                                  color: Color(0xFF73BCFF),
+                                  shape: OvalBorder(),
+                                ),
+                              ),
+                            ),
+
+                            // Circle at the end of education section
+                            Positioned(
+                              left: (screenWidth * 0.755) - screenWidth * 0.015,
+                              top: -screenHeight * 0.0033,
+                              child: Container(
+                                width: screenWidth * 0.03,
+                                height: screenWidth * 0.03,
+                                decoration: const ShapeDecoration(
+                                  color: Color(0xFF007BEB),
+                                  shape: OvalBorder(),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
 
@@ -393,7 +540,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Positioned(
-                        left: screenWidth * 0.42, // Center position
+                        left: screenWidth * 0.23, // Center position
                         top: screenHeight * 0.063, // 47/748 (relative to card) - 486-439=47
                         child: Text(
                           '진정',
@@ -407,7 +554,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Positioned(
-                        left: screenWidth * 0.77, // Right edge
+                        left: screenWidth * 0.39, // Right edge
                         top: screenHeight * 0.063, // 47/748 (relative to card) - 486-439=47
                         child: Text(
                           '교육',
@@ -424,7 +571,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       // Bottom message
                       Positioned(
                         left: screenWidth * 0.0675, // 17/371 (relative to card) - 69-52=17
-                        top: screenHeight * 0.126, // 94/748 (relative to card) - 533-439=94
+                        top: screenHeight * 0.1, // 94/748 (relative to card) - 533-439=94
                         child: SizedBox(
                           width: screenWidth * 0.644, // 239/371
                           child: Text(

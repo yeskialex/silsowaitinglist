@@ -33,26 +33,27 @@ class _ScanSwipeScreenState extends State<ScanSwipeScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: Padding(
-          padding: EdgeInsets.only(left: screenWidth * 0.054),
-          child: SvgPicture.asset(
-            'assets/logo2.svg',
-            width: screenWidth * 0.04,
-            height: screenHeight * 0.02,
-          ),
-        ),
-        leadingWidth: screenWidth * 0.2,
-      ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            SizedBox(height: screenHeight * 0.02),
+            // Logo on top left
+            Positioned(
+              left: screenWidth * 0.054,
+              top: screenHeight * 0.02,
+              child: SvgPicture.asset(
+                'assets/logo2.svg',
+                width: screenWidth * 0.08,
+                height: screenHeight * 0.04,
+              ),
+            ),
 
-            // Title and date section with padding
+            // Main content
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: screenHeight * 0.08),
+
+                // Title and date section with padding
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.054),
               child: Column(
@@ -176,6 +177,8 @@ class _ScanSwipeScreenState extends State<ScanSwipeScreen> {
               ),
 
               SizedBox(height: screenHeight * 0.04),
+              ],
+            ),
           ],
         ),
       ),
