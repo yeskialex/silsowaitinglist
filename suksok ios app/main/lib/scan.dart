@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'scan_swipe.dart';
 
 class ScanScreen extends StatelessWidget {
   const ScanScreen({super.key});
@@ -91,7 +92,7 @@ class ScanScreen extends StatelessWidget {
                 height: screenHeight * 0.057,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle scan start action
+                    _showHealthReportDialog(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF007BEB),
@@ -116,6 +117,98 @@ class ScanScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showHealthReportDialog(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withValues(alpha: 0.6),
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.054),
+          child: Container(
+            width: screenWidth * 0.72,
+            height: screenHeight * 0.265,
+            decoration: ShapeDecoration(
+              color: const Color(0xFF007BEB),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.37),
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Title text
+                Text(
+                  '민준이의 건강기록이\n도착했어요!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontSize: screenWidth * 0.0485,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFFF8F8F8),
+                    height: 1.44,
+                  ),
+                ),
+
+                SizedBox(height: screenHeight * 0.015),
+
+                // Date range
+                Text(
+                  '7월 10일-7월 24일',
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontSize: screenWidth * 0.0324,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFFF8F8F8),
+                  ),
+                ),
+
+                SizedBox(height: screenHeight * 0.025),
+
+                // Confirm button
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ScanSwipeScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: screenWidth * 0.59,
+                    height: screenHeight * 0.059,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFFF8F8F8),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(26),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '확인하기',
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontSize: screenWidth * 0.0405,
+                          fontWeight: FontWeight.w700,
+                          color: const Color(0xFF007BEB),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

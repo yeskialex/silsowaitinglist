@@ -223,6 +223,7 @@ class LogsScreen extends StatelessWidget {
 
                 // Progress bar
                 Stack(
+                  clipBehavior: Clip.none,
                   children: [
                     // Background bar
                     Container(
@@ -238,7 +239,7 @@ class LogsScreen extends StatelessWidget {
 
                     // Tantrum section (light blue)
                     Container(
-                      width: screenWidth * 0.75 * tantrumProgress,
+                      width: (screenWidth * 0.75) * (tantrumProgress / (tantrumProgress + calmProgress + educationProgress)),
                       height: screenHeight * 0.01,
                       decoration: ShapeDecoration(
                         color: const Color(0xFFC9E5FF),
@@ -250,9 +251,9 @@ class LogsScreen extends StatelessWidget {
 
                     // Calm section (medium blue)
                     Positioned(
-                      left: screenWidth * 0.75 * tantrumProgress,
+                      left: (screenWidth * 0.75) * (tantrumProgress / (tantrumProgress + calmProgress + educationProgress)),
                       child: Container(
-                        width: screenWidth * 0.75 * calmProgress,
+                        width: (screenWidth * 0.75) * (calmProgress / (tantrumProgress + calmProgress + educationProgress)),
                         height: screenHeight * 0.01,
                         decoration: ShapeDecoration(
                           color: const Color(0xFF73BCFF),
@@ -265,15 +266,57 @@ class LogsScreen extends StatelessWidget {
 
                     // Education section (dark blue)
                     Positioned(
-                      left: screenWidth * 0.75 * (tantrumProgress + calmProgress),
+                      left: (screenWidth * 0.75) * ((tantrumProgress + calmProgress) / (tantrumProgress + calmProgress + educationProgress)),
                       child: Container(
-                        width: screenWidth * 0.75 * educationProgress,
+                        width: (screenWidth * 0.75) * (educationProgress / (tantrumProgress + calmProgress + educationProgress)),
                         height: screenHeight * 0.01,
                         decoration: ShapeDecoration(
                           color: const Color(0xFF007BEB),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.37),
                           ),
+                        ),
+                      ),
+                    ),
+
+                    // Circle at the end of tantrum section
+                    Positioned(
+                      left: ((screenWidth * 0.75) * (tantrumProgress / (tantrumProgress + calmProgress + educationProgress))) - screenWidth * 0.015,
+                      top: -screenHeight * 0.002,
+                      child: Container(
+                        width: screenWidth * 0.03,
+                        height: screenWidth * 0.03,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFFC9E5FF),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                    ),
+
+                    // Circle at the end of calm section
+                    Positioned(
+                      left: ((screenWidth * 0.75) * ((tantrumProgress + calmProgress) / (tantrumProgress + calmProgress + educationProgress))) - screenWidth * 0.015,
+                      top: -screenHeight * 0.002,
+                      child: Container(
+                        width: screenWidth * 0.03,
+                        height: screenWidth * 0.03,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF73BCFF),
+                          shape: OvalBorder(),
+                        ),
+                      ),
+                    ),
+
+                    // Circle at the end of education section
+                    Positioned(
+                      left: (screenWidth * 0.75) - screenWidth * 0.015,
+                      top: -screenHeight * 0.002,
+                      child: Container(
+                        width: screenWidth * 0.03,
+                        height: screenWidth * 0.03,
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF007BEB),
+                          shape: OvalBorder(),
                         ),
                       ),
                     ),
@@ -348,28 +391,4 @@ class LogsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTimeLabel(String category, String time, double screenWidth) {
-    return Column(
-      children: [
-        Text(
-          time,
-          style: TextStyle(
-            fontFamily: 'Pretendard',
-            fontSize: screenWidth * 0.03,
-            fontWeight: FontWeight.w500,
-            color: const Color(0xFF007BEB),
-          ),
-        ),
-        Text(
-          category,
-          style: TextStyle(
-            fontFamily: 'Pretendard',
-            fontSize: screenWidth * 0.03,
-            fontWeight: FontWeight.w500,
-            color: const Color(0xFF007BEB),
-          ),
-        ),
-      ],
-    );
-  }
 }
