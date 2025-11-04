@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:io';
 import '4_loading.dart';
 
 class PictureScreen extends StatefulWidget {
-  const PictureScreen({super.key});
+  final String? imagePath;
+  const PictureScreen({super.key, this.imagePath});
 
   @override
   State<PictureScreen> createState() => _PictureScreenState();

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:camera/camera.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 import '3_picture.dart';
 
 class CameraReadyScreen extends StatefulWidget {
@@ -11,27 +14,80 @@ class CameraReadyScreen extends StatefulWidget {
 
 class _CameraReadyScreenState extends State<CameraReadyScreen> {
   bool _isCapturing = false;
+  CameraController? _cameraController;
+  List<CameraDescription>? _cameras;
+  bool _isCameraInitialized = false;
 
-  void _capturePhoto() {
+  @override
+  void initState() {
+    super.initState();
+    _initializeCamera();
+  }
+
+  @override
+  void dispose() {
+    _cameraController?.dispose();
+    super.dispose();
+  }
+
+  Future<void> _initializeCamera() async {
+    try {
+      _cameras = await availableCameras();
+      if (_cameras!.isNotEmpty) {
+        // Use back camera if available, otherwise use first camera
+        final backCamera = _cameras!.firstWhere(
+          (camera) => camera.lensDirection == CameraLensDirection.back,
+          orElse: () => _cameras!.first,
+        );
+
+        _cameraController = CameraController(
+          backCamera,
+          ResolutionPreset.high,
+          enableAudio: false,
+        );
+
+        await _cameraController!.initialize();
+        if (mounted) {
+          setState(() {
+            _isCameraInitialized = true;
+          });
+        }
+      }
+    } catch (e) {
+      print('Error initializing camera: $e');
+    }
+  }
+
+  Future<void> _capturePhoto() async {
+    if (_cameraController == null || !_cameraController!.value.isInitialized) {
+      return;
+    }
+
     setState(() {
       _isCapturing = true;
     });
 
-    // Simulate camera capture
-    Future.delayed(const Duration(milliseconds: 800), () {
+    try {
+      final XFile photo = await _cameraController!.takePicture();
+
       if (mounted) {
         setState(() {
           _isCapturing = false;
         });
 
-        // Navigate to picture screen
+        // Navigate to picture screen with the captured image
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const PictureScreen(),
+            builder: (context) => PictureScreen(imagePath: photo.path),
           ),
         );
       }
-    });
+    } catch (e) {
+      print('Error capturing photo: $e');
+      setState(() {
+        _isCapturing = false;
+      });
+    }
   }
 
   void _cancelCamera() {
@@ -70,35 +126,41 @@ class _CameraReadyScreenState extends State<CameraReadyScreen> {
             ),
           ),
 
-          // Large rectangle background
+          // Camera preview or placeholder
           Positioned(
             top: 140, // Just below the logo area
             left: 0,
             right: 0,
             bottom: 170, // Above the capture button area
-            child: Container(
-              color: const Color(0xFFE4EEF7),
-            ),
-          ),
-
-          // Center instruction text
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '정면으로 얼굴이\n나오게 촬영해주세요!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: const Color(0xFF007BEB),
-                    fontSize: 20,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.w600,
-                    height: 1.3,
+            child: _isCameraInitialized && _cameraController != null
+                ? ClipRect(
+                    child: Transform.scale(
+                      scale: _cameraController!.value.aspectRatio / (screenWidth / (screenHeight - 310)),
+                      child: Center(
+                        child: CameraPreview(_cameraController!),
+                      ),
+                    ),
+                  )
+                : Container(
+                    color: const Color(0xFFE4EEF7),
+                    child: Center(
+                      child: _cameras == null
+                          ? CircularProgressIndicator(
+                              color: const Color(0xFF007BEB),
+                            )
+                          : Text(
+                              '정면으로 얼굴이\n나오게 촬영해주세요!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: const Color(0xFF007BEB),
+                                fontSize: 20,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 1.3,
+                              ),
+                            ),
+                    ),
                   ),
-                ),
-              ],
-            ),
           ),
 
           // Bottom controls
