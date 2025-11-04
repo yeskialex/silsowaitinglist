@@ -60,12 +60,12 @@ class _DoneScreenState extends State<DoneScreen> {
 
             // Character face with orange character (middle)
             Positioned(
-              left: screenWidth * 0.24, // Equivalent to 76/371 = ~20.5%
+              left: screenWidth * 0.205, // Equivalent to 76/371 = ~20.5%
               top: screenHeight * 0.370, // Equivalent to 277/748 = ~37%
               child: SvgPicture.asset(
-                'assets/character_face_orange.svg',
-                width: screenWidth * 0.8, // Made bigger
-                height: screenHeight * 0.35, // Made bigger
+                'assets/open_eyes.svg',
+                width: screenWidth * 0.591, // Equivalent to 219.03/371 = ~59.1%
+                height: screenHeight * 0.259, // Equivalent to 193.66/748 = ~25.9%
               ),
             ),
 

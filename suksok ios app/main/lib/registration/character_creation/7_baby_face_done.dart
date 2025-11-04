@@ -80,7 +80,7 @@ class _BabyFaceDoneScreenState extends State<BabyFaceDoneScreen> {
               left: screenWidth * 0.205, // Equivalent to 76/371 = ~20.5%
               top: screenHeight * 0.370, // Equivalent to 277/748 = ~37%
               child: SvgPicture.asset(
-                'assets/open_eyes.svg',
+                'assets/closed_eyes.svg',
                 width: screenWidth * 0.591, // Equivalent to 219.03/371 = ~59.1%
                 height: screenHeight * 0.259, // Equivalent to 193.66/748 = ~25.9%
               ),

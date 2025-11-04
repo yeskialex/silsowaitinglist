@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'level2.dart';
 
 class ScanRecordsScreen extends StatelessWidget {
   const ScanRecordsScreen({super.key});
@@ -19,6 +20,37 @@ class ScanRecordsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(bottom: screenHeight * 0.03),
+        child: SizedBox(
+          width: screenWidth * 0.523,
+          height: screenHeight * 0.057,
+          child: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const HomeScreen(),
+                ),
+              );
+            },
+            backgroundColor: const Color(0xFF007BEB),
+            foregroundColor: const Color(0xFFF8F8F8),
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(21.27),
+            ),
+            label: Text(
+              '홈으로',
+              style: TextStyle(
+                fontSize: screenWidth * 0.0378,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Pretendard',
+              ),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
         child: Stack(
           children: [
