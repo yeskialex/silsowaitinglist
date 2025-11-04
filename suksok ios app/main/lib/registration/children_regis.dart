@@ -322,7 +322,9 @@ class _ChildrenRegistrationFlowState extends State<ChildrenRegistrationFlow> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '자녀${childIndex + 1} 프로필 설정',
+                  _childrenData[childIndex]['name'].isEmpty
+                      ? '자녀${childIndex + 1} 프로필 설정'
+                      : '${_childrenData[childIndex]['name']} 프로필 설정',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
