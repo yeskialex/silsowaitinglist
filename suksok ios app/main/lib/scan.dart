@@ -64,21 +64,16 @@ class ScanScreen extends StatelessWidget {
               ),
             ),
 
-            // Character figures placeholder - centered
+            // Character figures - centered
             Positioned(
-              left: 0,
-              right: 0,
-              top: screenHeight * 0.35,
+              left: screenWidth * 0.05,
+              right: -screenWidth * 0.05,
+              top: screenHeight * 0.25,
               bottom: screenHeight * 0.15,
               child: Center(
-                child: Text(
-                  '캐릭터 이미지 영역\n(이미지는 나중에 추가)',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Pretendard',
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
+                child: Image.asset(
+                  'assets/liningup.png',
+                  fit: BoxFit.contain,
                 ),
               ),
             ),

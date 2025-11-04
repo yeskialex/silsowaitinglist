@@ -14,7 +14,7 @@ class ScanRecordsScreen extends StatelessWidget {
     final List<Map<String, String>> records = [
       {'date': '2.12-2.26', 'image': 'assets/example_picture.png'},
       {'date': '2.27-3.12', 'image': 'assets/example2.png'},
-      {'date': '3.13-3.27', 'image': 'assets/example_picture.png'},
+      {'date': '3.13-3.27', 'image': 'assets/example3.png'},
       {'date': '3.28-4.11', 'image': 'assets/example2.png'},
     ];
 
@@ -152,6 +152,7 @@ class ScanRecordsScreen extends StatelessWidget {
               child: Image.asset(
                 imagePath,
                 fit: BoxFit.cover,
+                alignment: Alignment(0.0, -0.8),
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
                     color: const Color(0xFFF5F5F5),

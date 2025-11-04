@@ -197,7 +197,8 @@ class _ScanSwipeScreenState extends State<ScanSwipeScreen> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8.37),
         child: Image.asset(
-          index == 1 ? 'assets/example2.png' : 'assets/example_picture.png',
+          index == 0 ? 'assets/example_picture.png' :
+          index == 1 ? 'assets/example2.png' : 'assets/example3.png',
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
