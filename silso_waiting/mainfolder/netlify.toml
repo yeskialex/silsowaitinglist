@@ -11,6 +11,8 @@
 [build.environment]
   # Node version for build
   NODE_VERSION = "18"
+  # Disable secrets scanning for React environment variables (these are intentionally public)
+  SECRETS_SCAN_OMIT_KEYS = "REACT_APP_SUPABASE_URL,REACT_APP_SUPABASE_ANON_KEY"
 
 # Redirect all routes to index.html for React Router
 [[redirects]]
