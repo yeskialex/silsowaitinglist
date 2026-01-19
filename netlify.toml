@@ -4,7 +4,7 @@
   # Directory to change to before starting build
   base = "silso_waiting/mainfolder"
   # Directory that contains the built files
-  publish = "silso_waiting/mainfolder/build"
+  publish = "build"
   # Build command
   command = "npm run build"
 
