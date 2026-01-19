@@ -80,24 +80,17 @@
   margin: 0;
 }
 
-.email-form {
+.signup-form {
   margin-bottom: 30px;
 }
 
 .form-group {
   display: flex;
-  gap: 10px;
   flex-direction: column;
+  gap: 15px;
 }
 
-@media (min-width: 480px) {
-  .form-group {
-    flex-direction: row;
-  }
-}
-
-.email-input {
-  flex: 1;
+.form-input {
   padding: 14px 20px;
   font-size: 1rem;
   border: 2px solid #e5e7eb;
@@ -105,14 +98,15 @@
   outline: none;
   transition: all 0.3s ease;
   background: white;
+  width: 100%;
 }
 
-.email-input:focus {
+.form-input:focus {
   border-color: #8B5CF6;
   box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
 }
 
-.email-input:disabled {
+.form-input:disabled {
   background: #f9fafb;
   cursor: not-allowed;
 }
