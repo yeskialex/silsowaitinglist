@@ -1,0 +1,30 @@
+# Netlify configuration file for Silso Waitlist
+
+[build]
+  # Directory to change to before starting build
+  base = "mainfolder"
+  # Directory that contains the built files
+  publish = "mainfolder/build"
+  # Build command
+  command = "npm run build"
+
+[build.environment]
+  # Node version for build
+  NODE_VERSION = "18"
+  # Disable secrets scanning for React environment variables (these are intentionally public)
+  SECRETS_SCAN_OMIT_KEYS = "REACT_APP_SUPABASE_URL,REACT_APP_SUPABASE_ANON_KEY"
+
+# Redirect all routes to index.html for React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
