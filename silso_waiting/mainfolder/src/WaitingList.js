@@ -19,7 +19,7 @@ function WaitingList() {
     setStatus('loading');
 
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('waitlist')
         .insert([{ email: email.toLowerCase().trim() }])
         .select();
